@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>	
+<title>Learning Functional Programming with Scala</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/default.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/styles/tokyo-night-dark.min.css">
+<style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+	background: url("https://wlt.life/tools/cuadros.png");
+}
+h1 {
+	text-align: center;
+	margin: 35px 0 60px;
+}
+.main {
+	width: 50%;
+	margin: auto;
+	padding: 1% 5% 5%;
+	background-color: #effe;
+}
+h3 {
+	margin: 30px 0 40px;
+	color: #888;
+	font-weight: normal;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.0/languages/scala.min.js"></script>
+</head>
+<body>
+<div class="main">
+	<h1>Learning Functional Programming with Scala</h1>
+	<h3>
+	This is a page to teach Functional Programming through Scala, you can learn lambda, map, filter, and fold basic Functional Programming knowledge from here. I hope this page can really help you :)
+	</h3>
+	<h2>Lambda Expression</h2>
+	<div>
+	Anonymous functions (lambda expression) are a type of function that does not require an identifier to be defined. The syntax for defining anonymous functions is simple, the => arrow has a list of arguments on the left and the function body on the right. It is possible to assign anonymous functions to a variable, which can help make functional programming code more concise and intuitive.
+	</div>
+	<pre><code class="scala">val addOne = (x:Int) => x + 1
+addOne(1) // 2</code></pre>
+
+	<h2>Map Function</h2>
+	<div>
+	map is one of the higher-order functions that are used to do a function on all the arguments in a list and store the return value in a new list.
+
+	For example, we can try to do the double operation on list[1,2,3,4].
+	First define the double function.
+	<pre><code class="scala">val double = (x:Int) => x*2
+double(3) // 6</code></pre>
+	Then use the map function on the list.
+	<pre><code class="scala">val list = Seq(1,2,3,4)
+list.map(double) // List(2,4,6,8)</code></pre>
+	Of course, this operation can be simplified by using Anonymous functions.
+	<pre><code class="scala">val list = Seq(1,2,3,4)
+list.map(x => x * 2) // List(2,4,6,8)</code></pre>
+	</div>
+
+	<h2>Filter Function</h2>
+	<div>
+	filter is also one of the higher-order functions that are used to filter all the arguments in a list and store the filter results in a new list.
+	It requires a function that returns a boolean as an argument.
+	<pre><code class="scala">val even = (x:Int) => x % 2 == 0
+even(2) // true</code></pre>
+	For example, we can try to filter all even numbers from list[1,2,3,4].
+	<pre><code class="scala">val list = Seq(1,2,3,4)
+list.filter(even) // List(2,4)</code></pre>
+	</div>
+
+	<h2>Fold Function</h2>
+	<div>
+	fold is also one of the higher-order functions that are used to compress all the arguments in a list into the result of a single argument.
+	It requires a starting argument and a function that takes two arguments and returns one as an argument.
+	<pre><code class="scala">val add = (x:Int, y:Int) => x + y
+add(3, 4) // 7</code></pre>
+	For example, we can try to do the summation operation for list[1,2,3,4].
+	<pre><code class="scala">val list = Seq(1,2,3,4)
+list.flod(0)(add) // 10</code></pre>
+	</div>
+</div>
+</body>
+<script>hljs.highlightAll();</script>
+</html>
