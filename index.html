@@ -40,7 +40,9 @@ h3 {
 	Anonymous functions (lambda expression) are a type of function that does not require an identifier to be defined. The syntax for defining anonymous functions is simple, the => arrow has a list of arguments on the left and the function body on the right. It is possible to assign anonymous functions to a variable, which can help make functional programming code more concise and intuitive.
 	</div>
 	<pre><code class="scala">val addOne = (x:Int) => x + 1
-addOne(1) // 2</code></pre>
+addOne(1) // 2
+val minusOne = (x:Int) => x - 1
+minusOne(2) // 1</code></pre>
 
 	<h2>Map Function</h2>
 	<div>
@@ -53,7 +55,7 @@ double(3) // 6</code></pre>
 	Then use the map function on the list.
 	<pre><code class="scala">val list = Seq(1,2,3,4)
 list.map(double) // List(2,4,6,8)</code></pre>
-	Of course, this operation can be simplified by using Anonymous functions.
+	Of course, this operation can be simplified by using anonymous functions.
 	<pre><code class="scala">val list = Seq(1,2,3,4)
 list.map(x => x * 2) // List(2,4,6,8)</code></pre>
 	</div>
@@ -67,6 +69,9 @@ even(2) // true</code></pre>
 	For example, we can try to filter all even numbers from list[1,2,3,4].
 	<pre><code class="scala">val list = Seq(1,2,3,4)
 list.filter(even) // List(2,4)</code></pre>
+	And here is another example for filtering odd numbers by using anonymous functions with list[1,2,3,4].
+	<pre><code class="scala">val list = Seq(1,2,3,4)
+list.filter(x => x % 2 == 1) // List(1,3)</code></pre>
 	</div>
 
 	<h2>Fold Function</h2>
@@ -77,7 +82,43 @@ list.filter(even) // List(2,4)</code></pre>
 add(3, 4) // 7</code></pre>
 	For example, we can try to do the summation operation for list[1,2,3,4].
 	<pre><code class="scala">val list = Seq(1,2,3,4)
-list.flod(0)(add) // 10</code></pre>
+list.fold(0)(add) // 10</code></pre>
+	And here is another example for subtracting from 10 every number in list[1,2,3,4] (one by one) with anonymous functions.
+	<pre><code class="scala">val list = Seq(1,2,3,4)
+list.fold(10)(x, y => x - y) // 0</code></pre>
+	</div>
+
+	<br><br><br>
+	<h1>Generics in Scala</h1>
+	<h3> </h3>
+	<h2>Why we need generics</h2>
+	<div>
+	Without generics, we should repeat code for each data type.
+	<pre><code class="scala">case class StringContainer(str: String)
+case class IntContainer(int: Int)</code></pre>
+	Or we have to write code without type safety that takes any type, and needs casting later on.
+	<pre><code class="scala">case class AnyContainer(stuff: AnyRef)
+// put String in container
+val someContainer = AnyContainer("hi")
+// cast from AnyRef back to String in order to use the String
+val stuff: String = someContainer.stuff.asInstanceOf[String]</code></pre>
+	</div>
+
+	<h2>Class with Generics</h2>
+	<div>
+	With generics we can create a parametric polymophic container class that can be defined to take a type at compile time, code is reusable and no need for type casting.
+	<pre><code class="scala">case class Container[T](stuff: T)
+// create a new container and put an Int in it
+val myContainer : Container[Int] = Container[Int](1)
+// get the Int out of container
+val myInt : Int = myContainer.stuff</code></pre>
+	</div>
+
+	<h2>Method with Generics</h2>
+	<div>
+	With generics we can create a parametric polymophic method that can open different types of container. The once we parametric with a type T, the containerOpener can open container storing stuff of type T, and return stuff of type T.
+	<pre><code class="scala">def containerOpener[T](container: Container[T]): T = container.stuff
+val myInt2 : Int = containerOpener[Int](myContainer)</code></pre>
 	</div>
 </div>
 </body>
